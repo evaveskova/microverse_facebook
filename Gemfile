@@ -77,3 +77,4 @@ gem 'faker', '~> 2.6'
 gem 'will_paginate', '~> 3.2', '>= 3.2.1'
 
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'devise', '~> 4.7', '>= 4.7.1'
