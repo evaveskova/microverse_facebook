@@ -48,4 +48,19 @@ class PostsController < ApplicationController
     end
   end
 
+  private
+
+
+    def check_user_for_edit_post
+      @user = Post.find(params[:id]).author
+      unless @user == current_user 
+        flash[:danger] = "please you are not permited to edit this post"
+        redirect_back(fallback_location: root_path)
+      end 
+    end
+
+    def post_params
+      params.require(:post).permit(:content)
+    end
+
 end
