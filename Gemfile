@@ -78,3 +78,5 @@ gem 'will_paginate', '~> 3.2', '>= 3.2.1'
 
 gem 'bootstrap-will_paginate', '~> 1.0'
 gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'omniauth', '~> 1.9'
+gem 'bootstrap', '~> 4.3', '>= 4.3.1'
