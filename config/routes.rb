@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  
-  resources :posts
-  devise_for :users
-  root "posts#index"
+
+      get "users/index"
+    get '/show/:id', to: 'users#show', as: 'user'
+    devise_for :users, controllers: {
+        registrations: "registrations"
+    }
+
+    root "posts#index"
+    resources :posts, only: %i[index create edit update destroy new]
 end
