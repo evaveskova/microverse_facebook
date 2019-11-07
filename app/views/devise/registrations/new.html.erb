@@ -1,3 +1,5 @@
+
+
 <div class="container d-flex justify-content-between pt-5 text-dark">
   <div class="pt-5">
     <h1>Recent Logins</h1>
@@ -12,7 +14,7 @@
         <%= f.input :email, placeholder: "Enter your email", required: true, label: false, autofocus: true, input_html: { autocomplete: "email" }%>
         <%= f.input :password, placeholder: "password", required: true, label: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
         <%= f.input :birthday %>
-         <%= f.input :gender, as: :radio_buttons, collection: ["male","female","custom"], item_wrapper_class: "d-inline-block radio-buttons" %>
+         <%= f.input :gender, as: :radio_buttons, collection: ["male","female","custom"], item_wrapper_class: "d-inline-block radio-buttons" %>            
       </div>
       <div class="form-actions">
         <%= f.button :submit, "Sign up" %>
