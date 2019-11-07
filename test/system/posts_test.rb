@@ -16,6 +16,7 @@ class PostsTest < ApplicationSystemTestCase
 
     fill_in "Author", with: @post.author_id
     fill_in "Content", with: @post.content
+    fill_in "Id", with: @post.id
     click_on "Create Post"
 
     assert_text "Post was successfully created"
@@ -28,6 +29,7 @@ class PostsTest < ApplicationSystemTestCase
 
     fill_in "Author", with: @post.author_id
     fill_in "Content", with: @post.content
+    fill_in "Id", with: @post.id
     click_on "Update Post"
 
     assert_text "Post was successfully updated"
