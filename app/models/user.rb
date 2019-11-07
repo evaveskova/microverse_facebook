@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :validatable
+          :recoverable, :rememberable, :validatable
     has_many :posts, foreign_key: 'author_id', dependent: :destroy
 
     validates :first_name, presence: true,  length: { within: 4..20 }
@@ -12,4 +12,19 @@ class User < ApplicationRecord
     before_save :downcase_email
     before_save :capitalize_names
     before_create :gravatar_image_url
+
+    private
+
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    def gravatar_image_url
+      self.image = "https://gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
+    end
+
+    def capitalize_names
+      self.first_name = first_name.capitalize
+      self.last_name = last_name.capitalize
+    end
 end
