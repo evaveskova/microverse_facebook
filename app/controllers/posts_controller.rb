@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_for_edit_post, only: %i[ edit ]
+  before_action :check_user_for_delete_post, only: %i[ destroy ] 
 
   def index
     @posts = Post.all
     @post = Post.new
-    @main_user = User.find(current_user.id)
-    
+    @main_user = User.find(current_user.id)  
   end
 
   def show
@@ -41,11 +41,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:success] = "post has been deleted successfully"
+      redirect_back(fallback_location: root_path)
+    end 
   end
 
   private
@@ -60,7 +60,14 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:content)
+      params.require(:post).permit(:id, :content)
     end
 
+    def check_user_for_delete_post
+      @user = Post.find(params[:id]).author
+      unless @user == current_user
+        flash[:danger] = "please you are not permited to delete this post"
+        redirect_back(fallback_location: root_path)
+      end
+    end 
 end
