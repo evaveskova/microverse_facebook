@@ -1,6 +1,15 @@
-<h1>Editing Post</h1>
-
-<%= render 'form', post: @post %>
-
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 mx-auto mt-5">
+			<%= simple_form_for @post do |f| %>
+    		<%= f.error_notification %>
+		    <div class="form-inputs">
+		      <%= f.input :content, placeholder: "whats on your mind?", label: false %>
+		      </div>
+			<div class="form-actions">
+			  <%= f.button :submit, "Edit" %>
+			</div>
+    		<% end %> 
+		</div>
+	</div>    
+</div>  
