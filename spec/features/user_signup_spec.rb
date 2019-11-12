@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Users' do
@@ -62,6 +63,3 @@ RSpec.describe 'Users' do
     end
   end
 end
-
-
-

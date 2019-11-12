@@ -3,15 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   before :each do
     @user = User.new(first_name: 'firstname',
-      last_name: "lastname",
-      email: 'user1@example.com',
-      password: "password",
-      gender: "male",
-      birthday: "2019-11-06"
-      )
+                     last_name: 'lastname',
+                     email: 'user1@example.com',
+                     password: 'password',
+                     gender: 'male',
+                     birthday: '2019-11-06')
   end
 
   context 'Valid user' do
@@ -24,7 +22,7 @@ RSpec.describe User, type: :model do
       expect(@user).not_to be_valid
     end
 
-     it 'last name should be present' do
+    it 'last name should be present' do
       @user.last_name = '     '
       expect(@user).not_to be_valid
     end
