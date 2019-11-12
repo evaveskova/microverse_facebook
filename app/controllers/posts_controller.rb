@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     if @post.update_attributes(post_params)
       flash[:success] = 'post has been updated'
       redirect_to root_path
-    end 
+    end
   end
 
   def destroy
