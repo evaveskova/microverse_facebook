@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :post do
-    content {  }
+    content { Faker::Lorem.characters(number: 100) }
     association :author, factory: :user
   end
 
