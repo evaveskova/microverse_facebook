@@ -23,9 +23,9 @@ RSpec.describe 'post' do
 
  describe 'posts' do
 
-   scenario 'current user can create post' do
+   scenario "current user can create post" do
      visit root_path
-     login(created_user)
+     login(created_user) 
 
      post_content = Faker::Lorem.paragraph
      create_post(post_content)

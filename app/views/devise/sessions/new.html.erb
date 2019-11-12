@@ -13,7 +13,8 @@
       <%= f.input :last_name, placeholder: "Last name", label: false %>
         <%= f.input :email, placeholder: "Enter your email", required: true, label: false, autofocus: true, input_html: { autocomplete: "email" }%>
         <%= f.input :password, placeholder: "password", required: true, label: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
-        <%= f.input :birthday %>
+        <%= f.input :birthday, as: :date, start_year: Date.today.year,
+                              end_year: Date.today.year - 50 %>
          <%= f.input :gender,as: :radio_buttons, collection: ["male","female","custom"], item_wrapper_class: "d-inline-block radio-buttons" %>            
       </div>
       <div class="form-actions">
