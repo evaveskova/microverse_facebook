@@ -2,13 +2,13 @@
 
 FactoryBot.define do
   factory :post do
-    content { Faker::Lorem.paragraph }
+    content {  }
     association :author, factory: :user
   end
 
   factory :user do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name {  }
+    last_name { }
     sequence(:email) { |n| "user#{n}@email.com" }
     password { Faker::Internet.password }
     gender { %w[male female custom].sample }
