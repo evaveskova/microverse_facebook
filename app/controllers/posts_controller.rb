@@ -23,12 +23,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
-      flash[:success] = 'Post has been successfully created'
-      redirect_back(fallback_location: root_path)
-    else
-      render 'posts/index'
-    end
+    @post.save
+    flash[:success] = 'Post has been successfully created'
+    redirect_back(fallback_location: root_path)
   end
 
   def update
@@ -36,9 +33,7 @@ class PostsController < ApplicationController
     if @post.update_attributes(post_params)
       flash[:success] = 'post has been updated'
       redirect_to root_path
-    else
-      render 'edit'
-    end
+    end 
   end
 
   def destroy
