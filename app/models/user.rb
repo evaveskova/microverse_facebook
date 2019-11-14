@@ -16,8 +16,6 @@ class User < ApplicationRecord
   before_save :capitalize_names
   before_create :gravatar_image_url
 
-
-
   private
 
     def downcase_email
