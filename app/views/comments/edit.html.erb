@@ -1,11 +1,10 @@
 <div class="container ">
-    <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
-            <%= simple_form_for(@comment) do |f| %>
-
-            <%= f.input :content, placeholder: "Add a comment", label: false %>
-            <%= f.button :submit, "save changes", id: "save-changes"%>
-          <% end %>
-        </div>
-    </div>
+  <div class="row">
+    <div class="col-md-6 mx-auto mt-5">
+      <%= simple_form_for(@comment) do |f| %>
+        <%= f.input :content, placeholder: "Leave a comment", label: false %>
+        <%= f.button :submit, "save changes", id: "save-changes"%>
+      <% end %>
+      </div>
+  </div>
 </div>
