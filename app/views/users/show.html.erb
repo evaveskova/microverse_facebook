@@ -1,0 +1,60 @@
+<div class='row'>
+  <div class='col-md-10'>
+    <section id='user-banner' class='d-flex' style="background-image: url(<%= @user.image + '?s=350' %>); background-size: cover; background-position: center;">
+      <div id='interactions' class='row align-self-end d-flex'>
+        <div class=' mb-3 ml-4 col-sm-3'>
+          <%= image_tag "#{@user.image}?s=150", class: 'rounded-circle', alt: "user" %>
+          <h4 class="text-white ml-4"><%= @user.first_name %></h4>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 mt-5">
+			<h3>personal info</h3>
+			<h5>first name: <%= @user.first_name %></h5>
+			<h5>last name: <%= @user.last_name %></h5>
+			<h5>date of birth: <%= @user.birthday %></h5>
+			<h5>gender: <%= @user.gender %></h5>
+			<h5>email: <%= @user.email %></h5>
+		</div>
+		<div class="col-md-6 mt-3 border bg-white">
+			<div class="container mt-5">
+            <%= simple_form_for @post do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <%= f.input :content, placeholder: "whats on your mind?", label: false %>               
+            </div>
+            <div class="form-actions">
+              <%= f.button :submit, "create post" %>
+            </div>
+            <% end %> 
+          </div>
+
+           <% @user.posts.each do |post| %>
+           	  <div class="display-post-content mt-5 p-2 border bg-white">
+          <div class="container d-flex justify-content-between">
+            <%= image_tag "#{post.author.image}?s=50", class: 'rounded-circle', alt: "user" %>
+            <%= link_to post.author.first_name, post.author %>
+            <%= time_ago_in_words(post.created_at) %> ago
+          </div>         
+          <div class="container border p-3">
+            <%= post.content %>
+          </div>
+          <div class="container d-flex justify-content-between">
+            <%= link_to "Edit", edit_post_path(post), id: "edit" %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }, id: "delete" %>
+          </div>
+        </div>
+           <% end %>
+		</div>
+	</div>
+	
+</div>
+
+
+

@@ -1,0 +1,46 @@
+
+<div class="container post-index-main-wrapper">
+  <div class="row" id="index-wrapper-row">
+    <div class="col-md-6 mx-auto mt-5" id="index-wrapper-col">
+      <div id="post-form-div">
+        <h6 class="border bg-white p-2">Create post</h6>
+        <div class="d-flex border bg-white p-2">
+          <div><%= image_tag "#{@main_user.image}?s=50", class: 'rounded-circle', alt: "user" %></div>
+          <div class="container">
+            <%= simple_form_for @post do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <%= f.input :content, placeholder: "whats on your mind?", label: false %>               
+            </div>
+            <div class="form-actions">
+              <%= f.button :submit, "create post", id: "create-post" %>
+            </div>
+            <% end %> 
+          </div>          
+        </div>
+      </div>
+      
+        <% @posts.each do |post| %>
+        <div class="display-post-content mt-5 p-2 border bg-white">
+          <div class="container d-flex justify-content-between">
+            <%= image_tag "#{post.author.image}?s=50", class: 'rounded-circle', alt: "user" %>
+            <%= link_to post.author.first_name, post.author %>
+            <%= time_ago_in_words(post.created_at) %> ago
+          </div>         
+          <div class="container border p-3">
+            <%= post.content %>
+          </div>
+          <div class="container d-flex justify-content-between">
+            <%= link_to "Edit", edit_post_path(post), id: "edit" %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }, id: "delete" %>
+          </div>
+        </div>
+        <% end %>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
