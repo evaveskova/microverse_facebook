@@ -1,4 +1,11 @@
+<div class='mx-auto bg-danger'>
+            <%= simple_form_for(@comment, html:{ class: "form-inline" }) do |f| %>
 
+                <%= f.input :content, placeholder: "Add a comment", label: false %>
+                <%= f.input :post_id, :as => :hidden, :input_html => { :value => post.id } %>
+              <%= f.button :submit, "comment", id: "comment-button" %>
+          <% end %>
+        </div>
 <div class="container post-index-main-wrapper">
   <div class="row" id="index-wrapper-row">
     <div class="col-md-6 mx-auto mt-5" id="index-wrapper-col">

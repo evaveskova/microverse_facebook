@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     @posts = Post.all
     @post = Post.new
     @main_user = User.find(current_user.id)
+    @comment = Comment.new
+    @like = Like.new
   end
 
   def show; end
