@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :comment do
+    author { nil }
+    post { nil }
+    content { "MyString" }
+  end
+
   factory :post do
     content { Faker::Lorem.characters(number: 100) }
     association :author, factory: :user
