@@ -9,7 +9,7 @@ FactoryBot.define do
   factory :comment do
     author { nil }
     post { nil }
-    content { "MyString" }
+    content { 'MyString' }
   end
 
   factory :post do
