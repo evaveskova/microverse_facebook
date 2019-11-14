@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :like do
+    likeable { nil }
+    author { nil }
+  end
+
   factory :comment do
     author { nil }
     post { nil }
