@@ -13,4 +13,21 @@ class CommentsController < ApplicationController
 	def edit
 		@comment = Comment.find(params[:id])
 	end 
+
+	def update
+		@comment = Comment.find(params[:id])
+		if @comment.update_attributes(comment_params)
+			flash[:success] = "post has been updated"
+      		redirect_to root_path
+		end
+	end 
+
+	def destroy
+		@comment = Comment.find(params[:id])
+		if @comment.destroy
+			flash[:info] = "comment has been successfully deleted"
+			redirect_back(fallback_location: root_path)
+		end 
+	end 
+
 end
