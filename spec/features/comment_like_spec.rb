@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe 'post' do
   let(:created_user) { FactoryBot.create(:user) }
   let(:created_post) { FactoryBot.create(:post) }
-   let(:another_user) { FactoryBot.create(:user) }
-
+  let(:another_user) { FactoryBot.create(:user) }
 
   def login(user)
     within 'form.form-inline' do
@@ -23,23 +22,20 @@ RSpec.describe 'post' do
 
   def create_comment(content)
     fill_in 'comment[content]', with: content
-    click_button "comment-button"
+    click_button 'comment-button'
   end
 
   def edit_comment(content)
-    fill_in "comment[content]", with: content
-    click_button "save-changes"
-  end 
+    fill_in 'comment[content]', with: content
+    click_button 'save-changes'
+  end
 
   def create_like_on_post
-    fill_in 'like[likeable_type]', with: "Post"
+    fill_in 'like[likeable_type]', with: 'Post'
     fill_in 'like[likeable_id]', with: 1
-  end  
-
-
+  end
 
   describe 'comments and likes' do
-
     scenario 'current user can comment on post' do
       visit root_path
       login(created_user)
@@ -66,7 +62,7 @@ RSpec.describe 'post' do
       comment_content = Faker::Lorem.paragraph
       create_comment(comment_content)
       expect(page).to have_content(comment_content)
-      click_link "delete-comment"
+      click_link 'delete-comment'
       expect(page).not_to have_content(comment_content)
     end
 
@@ -85,7 +81,7 @@ RSpec.describe 'post' do
       visit root_path
       login(another_user)
       click_link 'delete-comment'
-      expect(page).to have_content("please you are not permited to delete this post")
+      expect(page).to have_content('please you are not permited to delete this post')
     end
 
     scenario 'current user can edit his comment' do
@@ -100,7 +96,7 @@ RSpec.describe 'post' do
       comment_content = Faker::Lorem.paragraph
       create_comment(comment_content)
       expect(page).to have_content(comment_content)
-      click_link "edit-comment"
+      click_link 'edit-comment'
 
       edit_content = Faker::Lorem.paragraph
       edit_comment(edit_content)
@@ -124,11 +120,11 @@ RSpec.describe 'post' do
       visit root_path
       login(another_user)
 
-      click_link "edit-comment"
-      expect(page).to have_content("please you are not permited to edit this post")
+      click_link 'edit-comment'
+      expect(page).to have_content('please you are not permited to edit this post')
     end
 
-    scenario "current user can like a post" do
+    scenario 'current user can like a post' do
       visit root_path
       login(created_user)
 
@@ -137,8 +133,8 @@ RSpec.describe 'post' do
 
       expect(page).to have_content(post_content)
 
-      click_button "like-post"
-      expect(page).to have_content("liked a Post")
+      click_button 'like-post'
+      expect(page).to have_content('liked a Post')
     end
 
     scenario "current user can't like a post two times" do
@@ -150,13 +146,13 @@ RSpec.describe 'post' do
 
       expect(page).to have_content(post_content)
 
-      click_button "like-post"
-      expect(page).to have_content("liked a Post")
-      click_button "like-post"
-      expect(page).not_to have_content("liked a Post")
+      click_button 'like-post'
+      expect(page).to have_content('liked a Post')
+      click_button 'like-post'
+      expect(page).not_to have_content('liked a Post')
     end
 
-    scenario "current user can like a comment" do
+    scenario 'current user can like a comment' do
       visit root_path
       login(created_user)
 
@@ -168,8 +164,8 @@ RSpec.describe 'post' do
       create_comment(comment_content)
       expect(page).to have_content(comment_content)
 
-      click_button "like-comment"
-      expect(page).to have_content("liked a Comment")
+      click_button 'like-comment'
+      expect(page).to have_content('liked a Comment')
     end
 
     scenario "current user can't like a comment two times" do
@@ -184,10 +180,10 @@ RSpec.describe 'post' do
       create_comment(comment_content)
       expect(page).to have_content(comment_content)
 
-      click_button "like-comment"
-      expect(page).to have_content("liked a Comment")
-      click_button "like-comment"
-      expect(page).not_to have_content("liked a Comment")
+      click_button 'like-comment'
+      expect(page).to have_content('liked a Comment')
+      click_button 'like-comment'
+      expect(page).not_to have_content('liked a Comment')
     end
-  end 
-end 
+  end
+end
