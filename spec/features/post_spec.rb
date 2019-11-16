@@ -33,7 +33,6 @@ RSpec.describe 'post' do
     end
   end
 
-
   def login(user)
     within 'form.form-inline' do
       fill_in 'user[email]', with: user.email
@@ -56,7 +55,6 @@ RSpec.describe 'post' do
   end
 
   describe 'posts' do
-
     let(:roy) { new_user }
     let(:eva) { new_user }
 

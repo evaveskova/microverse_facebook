@@ -103,8 +103,8 @@ RSpec.describe 'post' do
       visit users_index_path
       click_button 'friend-link'
       expect(page).to have_content 'as been added to your friend list'
-      click_button "unfriend-link"
-      expect(page).to have_content "was successfully unfriended"
+      click_button 'unfriend-link'
+      expect(page).to have_content 'was successfully unfriended'
     end
   end
 end

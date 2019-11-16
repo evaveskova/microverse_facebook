@@ -68,9 +68,7 @@ RSpec.describe 'post' do
     end
   end
 
-
   describe 'comments and likes' do
-
     let(:roy) { new_user }
     let(:eva) { new_user }
 
