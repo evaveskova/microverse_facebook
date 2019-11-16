@@ -7,4 +7,13 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { minimum: 2 }
   # validates :author, presence: true
   default_scope -> { order(created_at: :desc) }
+
+  def self.visible_to_user(user)
+    find_by_sql(["SELECT * FROM posts
+      WHERE author_id = ?
+      OR author_id IN (
+        SELECT friend_id FROM friendships
+          WHERE user_id = ?)
+      ORDER BY posts.updated_at DESC", user.id, user.id])
+  end
 end
