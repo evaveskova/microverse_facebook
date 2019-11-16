@@ -10,10 +10,10 @@ class Post < ApplicationRecord
 
   def self.visible_to_user(user)
     find_by_sql(["SELECT * FROM posts
-      WHERE author_id = #{user.id}
+      WHERE author_id = ?
       OR author_id IN (
         SELECT friend_id FROM friendships
-          WHERE user_id = #{user.id})
-      ORDER BY posts.updated_at DESC"])
+          WHERE user_id = ?)
+      ORDER BY posts.updated_at DESC", user.id, user.id])
   end
 end
