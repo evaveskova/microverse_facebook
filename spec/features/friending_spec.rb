@@ -48,3 +48,19 @@ RSpec.describe 'post' do
       click_button "friend-link"
       expect(page).to have_content("has been added to your friend list")
     end
+
+    scenario 'current user can unfriend another user' do
+      visit root_path
+      login(created_user)
+
+      click_link "users-index-link"
+
+      expect(page).to have_content(created_user.first_name)
+      click_button "friend-link"
+      expect(page).to have_content("has been added to your friend list")
+      click_button "unfriend-link"
+      expect(page).to have_content("was successfully unfriended")
+    end
+
+  end
+end
