@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_action :check_user_for_delete_post, only: %i[destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.visible_to_user current_user
     @post = Post.new
     @main_user = User.find(current_user.id)
     @comment = Comment.new
