@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
-  
-
   let(:roy) { FactoryBot.create(:user) }
   let(:eva) { FactoryBot.create(:user) }
 
@@ -32,5 +32,4 @@ RSpec.describe Friendship, type: :model do
 
     expect(friendship).not_to be_valid
   end
- 
 end
