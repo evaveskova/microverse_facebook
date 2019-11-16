@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: 'author_id', dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :likes, foreign_key: 'author_id', dependent: :destroy
+  has_many :friendships
+  has_many :friends, through: :friendships, dependent: :destroy
 
   validates :first_name, presence: true, length: { within: 4..20 }
   validates :last_name, presence: true, length: { within: 4..20 }
