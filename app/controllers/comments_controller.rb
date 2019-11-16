@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   def check_user_for_delete_comment
     @user = Comment.find(params[:id]).author
     unless @user == current_user
-      flash[:danger] = 'please you are not permited to delete this post'
+      flash[:danger] = 'please you are not permited to delete this comment'
       redirect_back(fallback_location: root_path)
     end
   end
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   def check_user_for_edit_comment
     @user = Comment.find(params[:id]).author
     unless @user == current_user
-      flash[:danger] = 'please you are not permited to edit this post'
+      flash[:danger] = 'please you are not permited to edit this comment'
       redirect_back(fallback_location: root_path)
     end
   end
