@@ -29,6 +29,16 @@ class FriendshipsController < ApplicationController
 
   private
 
+  def change_friendship_status(pending_friend_request)
+		pending_friend_request.update_attributes(status: true)
+	end
+
+  def accept_friend_request(request_maker)
+  		current_user.friendships.create(friend: request_maker, status: true)
+  		flash[:success] = "you have accepted a friend request from #{request_maker.first_name}"
+  		redirect_back(fallback_location: root_path)
+  	end
+
   def friendship_params
     params.require(:friendship).permit(:friend)
   end
