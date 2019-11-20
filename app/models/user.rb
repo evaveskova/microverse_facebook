@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: 'author_id', dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :likes, foreign_key: 'author_id', dependent: :destroy
+  has_many :friendships
+  has_many :friends, through: :friendships, dependent: :destroy
 
   validates :first_name, presence: true, length: { within: 4..20 }
   validates :last_name, presence: true, length: { within: 4..20 }
@@ -16,6 +18,24 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_save :capitalize_names
   before_create :gravatar_image_url
+
+  def self.find_confirmed_friends(user)
+    find_by_sql(["SELECT * FROM users
+      WHERE id IN (
+        SELECT friend_id FROM friendships
+          WHERE user_id = ?
+          AND status = true)
+      ORDER BY users.updated_at DESC", user.id])
+  end
+
+  def self.find_pending_friends(user)
+    find_by_sql(["SELECT * FROM users
+      WHERE id IN (
+        SELECT friend_id FROM friendships
+          WHERE user_id = ?
+          AND status = false)
+      ORDER BY users.updated_at DESC", user.id])
+  end
 
   private
 
