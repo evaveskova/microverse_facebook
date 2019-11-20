@@ -19,6 +19,24 @@ class User < ApplicationRecord
   before_save :capitalize_names
   before_create :gravatar_image_url
 
+  def self.find_confirmed_friends(user)
+    find_by_sql(["SELECT * FROM users
+      WHERE id IN (
+        SELECT friend_id FROM friendships
+          WHERE user_id = ?
+          AND status = true)
+      ORDER BY users.updated_at DESC", user.id])
+  end
+  
+  def self.find_pending_friends(user)
+    find_by_sql(["SELECT * FROM users
+      WHERE id IN (
+        SELECT friend_id FROM friendships
+          WHERE user_id = ?
+          AND status = false)
+      ORDER BY users.updated_at DESC", user.id])
+  end
+
   private
 
   def downcase_email
