@@ -1,15 +1,22 @@
- <h1>List of friend request</h1>
-
-<% @pending_request.each do |request| %>
-	<div class="d-flex justify-content-between">
-		<%= request.user.first_name %>
-		<%= simple_form_for(@friendship) do |f| %>
-	  		<%= f.input :friend, :as => :hidden, :input_html => { :value => request.user.id } %>
-	        <%= f.input :pending_request_id, :as => :hidden, :input_html => { :value => request.id } %>
-	  		<%= f.button :submit, "Accept Friend Request", id: "friend-link" %> 
-		<% end %> 
-		<%= simple_form_for(request, html: { method: :delete }, remote: true) do |f| %>
-			<%= f.button :submit, "delete friend request", id: "delete-friend-request-link" %> 
-		<% end %> 
-	</div>
+<div class="row">
+	<div class="col-md-8 mx-auto mt-5">
+		<h1 class="text-align-center">List of friend requests</h1>
+		<% if @pending_request.empty? %>
+			<h3>You have no friend requests</h3>
+		<% end %>
+		<% @pending_request.each do |request| %>
+		<div class="d-flex justify-content-between">
+			<%= link_to "#{request.user.first_name}", request.user %>
+			<%= simple_form_for(@friendship) do |f| %>
+		  		<%= f.input :friend, :as => :hidden, :input_html => { :value => request.user.id } %>
+		        <%= f.input :pending_request_id, :as => :hidden, :input_html => { :value => request.id } %>
+		  		<%= f.button :submit, "Accept Friend Request", id: "friend-link" %> 
+			<% end %> 
+			<%= simple_form_for(request, html: { method: :delete }, remote: true) do |f| %>
+				<%= f.button :submit, "delete friend request", id: "delete-friend-request-link" %> 
+			<% end %> 
+		</div>
 <% end %>
+	</div>
+</div>
+ 
