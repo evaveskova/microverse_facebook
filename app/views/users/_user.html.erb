@@ -1,4 +1,3 @@
-
 <div class='col-md-10 row my-3 ml-2 mx-auto'>
   <div class='col-sm-3'>
     <%= image_tag user.image + "?s=100", class: 'img-fluid' %>
@@ -7,17 +6,23 @@
     <%= link_to user.first_name, user, class: 'align-self-center' %>
   </div>
   <div class="col-sm-4">
-  <% unless user == current_user %> 
-    <% if current_user.friends.include?user%>
-        <%= simple_form_for(current_user.friendships.find_by(friend_id: user.id), html: { method: :delete }, remote: true) do |f| %>
-          <%= f.button :submit, "Unfriend", id: "unfriend-link" %> 
-        <% end %> 
-      <% else %>
-        <%= simple_form_for(@friendship) do |f| %>
-          <%= f.input :friend, :as => :hidden, :input_html => { :value => user.id } %>
-          <%= f.button :submit, "Add friend", id: "friend-link" %> 
-        <% end %> 
-      <% end %> 
-  <% end %> 
+  <% unless user == current_user %>
+  	<% if @confirmed_friends.include?user%>
+  			<%= simple_form_for(current_user.friendships.find_by(friend_id: user.id),
+        html: { method: :delete }, remote: true) do |f| %>
+  				<%= f.button :submit, "Unfriend", id: "unfriend-link" %>
+  			<% end %>
+    <% elsif @pending_friends.include?user %>
+        <span class="badge badge-primary">pending request</span>
+          <%= link_to 'delete', current_user.friendships.find_by(friend_id: user.id),
+          method: :delete, data: { confirm: 'Are you sure you want to delete sent friend request?' },
+          id: "delete-pending-request-link" %>
+  		<% else %>
+  			<%= simple_form_for(@friendship) do |f| %>
+  				<%= f.input :friend, :as => :hidden, :input_html => { :value => user.id } %>
+  				<%= f.button :submit, "Send Friend Request", id: "send-friend-request-link" %>
+  			<% end %>
+  		<% end %>
+  <% end %>
   </div>
 </div>
