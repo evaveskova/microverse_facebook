@@ -106,11 +106,10 @@ RSpec.describe 'post' do
       visit friendships_path
       click_button 'friend-link'
 
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
       visit root_path
       click_link 'edit'
       expect(page).to have_content('please you are not permited to edit this post')
-      
     end
 
     scenario 'current user can delete his post' do
@@ -125,7 +124,6 @@ RSpec.describe 'post' do
     end
 
     scenario "current user can't delete another users post" do
-
       visit root_path
       raw_login(roy)
 
@@ -142,11 +140,10 @@ RSpec.describe 'post' do
       visit friendships_path
       click_button 'friend-link'
 
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
       visit root_path
       click_link 'delete'
       expect(page).to have_content('please you are not permited to delete this post')
-      
     end
   end
 end

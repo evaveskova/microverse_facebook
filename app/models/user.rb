@@ -27,7 +27,7 @@ class User < ApplicationRecord
           AND status = true)
       ORDER BY users.updated_at DESC", user.id])
   end
-  
+
   def self.find_pending_friends(user)
     find_by_sql(["SELECT * FROM users
       WHERE id IN (

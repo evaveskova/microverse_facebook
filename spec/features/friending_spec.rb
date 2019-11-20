@@ -103,7 +103,7 @@ RSpec.describe 'post' do
       visit users_index_path
       click_button 'send-friend-request-link'
       expect(page).to have_content 'pending request'
-      click_link "delete-pending-request-link"
+      click_link 'delete-pending-request-link'
 
       expect(page).to have_content 'Friend request has been deleted'
     end
@@ -118,7 +118,7 @@ RSpec.describe 'post' do
       login(eva)
       visit friendships_path
       click_button 'friend-link'
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
     end
 
     scenario 'user can delete friend request from other users' do
@@ -144,11 +144,10 @@ RSpec.describe 'post' do
       login(eva)
       visit friendships_path
       click_button 'friend-link'
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
       visit users_index_path
       click_button 'unfriend-link'
       expect(page).to have_content 'has been unfriended'
-
     end
   end
 end

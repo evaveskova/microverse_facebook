@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  	@users = User.all
-  	@friendship = Friendship.new
-  	@confirmed_friends = User.find_confirmed_friends(current_user)
-  	@pending_friends = User.find_pending_friends(current_user)
+    @users = User.all
+    @friendship = Friendship.new
+    @confirmed_friends = User.find_confirmed_friends(current_user)
+    @pending_friends = User.find_pending_friends(current_user)
   end
 
   def show

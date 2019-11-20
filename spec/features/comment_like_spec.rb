@@ -131,7 +131,7 @@ RSpec.describe 'post' do
       visit friendships_path
       click_button 'friend-link'
 
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
       visit root_path
       click_link 'delete-comment'
       expect(page).to have_content('please you are not permited to delete this comment')
@@ -177,7 +177,7 @@ RSpec.describe 'post' do
       visit friendships_path
       click_button 'friend-link'
 
-      expect(page).to have_content "you have accepted a friend request from"
+      expect(page).to have_content 'you have accepted a friend request from'
       visit root_path
       click_link 'delete-comment'
       expect(page).to have_content('please you are not permited to delete this comment')
