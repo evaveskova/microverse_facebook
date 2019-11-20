@@ -13,7 +13,8 @@ class Post < ApplicationRecord
       WHERE author_id = ?
       OR author_id IN (
         SELECT friend_id FROM friendships
-          WHERE user_id = ?)
+          WHERE user_id = ?
+          AND status = true)
       ORDER BY posts.updated_at DESC", user.id, user.id])
   end
 end
