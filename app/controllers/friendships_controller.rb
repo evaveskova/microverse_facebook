@@ -18,14 +18,22 @@ class FriendshipsController < ApplicationController
 	end
 
   def destroy
-    @friend = Friendship.find(params[:id]).friend
-    if current_user.friends.include? @friend
-      friend_name = @friend.first_name
-      unfriend(@friend)
-      flash[:info] = "#{friend_name} was successfully unfriended"
+    @friendship = Friendship.find(params[:id])
+    if @friendship.status == false
+      @friendship.destroy
+      flash[:info] = "Friend request has been deleted"
       redirect_back(fallback_location: root_path)
-    end
-  end
+    else
+      @friendship_two = Friendship.where(user: @friendship.friend, friend: current_user)
+      @friend_name = @friendship.friend.first_name
+      @friendship.destroy
+      @friendship_two.each do |f|
+        f.destroy
+      end 
+      flash[:info] = "#{@friend_name} has been unfriended"
+      redirect_back(fallback_location: root_path)
+    end 
+  end 
 
   private
 
