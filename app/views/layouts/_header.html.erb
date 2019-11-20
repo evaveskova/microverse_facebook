@@ -18,6 +18,9 @@
         <li class="nav-item">
           <%= link_to "Users", users_index_path, class: "nav-link", id: "users-index-link"%>
         </li>
+        <li class="nav-item">
+          <%= link_to "Notifications #{friend_request_count}", friendships_path, class: "nav-link", id: "friend-request-index-link"%>
+        </li>
       </ul>
     <% else %>
       <div class="d-flex justify-content-between container">

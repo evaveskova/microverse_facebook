@@ -88,23 +88,67 @@ RSpec.describe 'post' do
       end
     end
 
-    scenario 'user can add a friend' do
+    scenario 'user can send friend request to other users' do
       visit root_path
       login(roy)
       visit users_index_path
-      click_button 'friend-link'
+      click_button 'send-friend-request-link'
 
-      expect(page).to have_content 'as been added to your friend list'
+      expect(page).to have_content 'pending request'
     end
 
-    scenario 'user can unfriend' do
+    scenario 'user can cancel sent friend request to other users' do
       visit root_path
       login(roy)
       visit users_index_path
+      click_button 'send-friend-request-link'
+      expect(page).to have_content 'pending request'
+      click_link "delete-pending-request-link"
+
+      expect(page).to have_content 'Friend request has been deleted'
+    end
+
+    scenario 'user can accept friend request from other users' do
+      visit root_path
+      login(roy)
+      visit users_index_path
+      click_button 'send-friend-request-link'
+      expect(page).to have_content 'pending request'
+      click_link 'logout'
+      login(eva)
+      visit friendships_path
       click_button 'friend-link'
-      expect(page).to have_content 'as been added to your friend list'
+      expect(page).to have_content "you have accepted a friend request from"
+    end
+
+    scenario 'user can delete friend request from other users' do
+      visit root_path
+      login(roy)
+      visit users_index_path
+      click_button 'send-friend-request-link'
+      expect(page).to have_content 'pending request'
+      click_link 'logout'
+      login(eva)
+      visit friendships_path
+      click_button 'delete-friend-request-link'
+      expect(page).to have_content 'Friend request has been deleted'
+    end
+
+    scenario 'can unfriend other users' do
+      visit root_path
+      login(roy)
+      visit users_index_path
+      click_button 'send-friend-request-link'
+      expect(page).to have_content 'pending request'
+      click_link 'logout'
+      login(eva)
+      visit friendships_path
+      click_button 'friend-link'
+      expect(page).to have_content "you have accepted a friend request from"
+      visit users_index_path
       click_button 'unfriend-link'
-      expect(page).to have_content 'was successfully unfriended'
+      expect(page).to have_content 'has been unfriended'
+
     end
   end
 end

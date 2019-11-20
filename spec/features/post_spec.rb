@@ -95,17 +95,22 @@ RSpec.describe 'post' do
 
       post_content = Faker::Lorem.paragraph
       create_post(post_content)
-      expect(page).to have_content(post_content)
+
+      visit users_index_path
+      click_button 'send-friend-request-link'
       click_link 'logout'
+
       visit new_user_session_path
       raw_login(eva)
-      visit root_path
-      visit users_index_path
+
+      visit friendships_path
       click_button 'friend-link'
-      expect(page).to have_content 'as been added to your friend list'
+
+      expect(page).to have_content "you have accepted a friend request from"
       visit root_path
       click_link 'edit'
       expect(page).to have_content('please you are not permited to edit this post')
+      
     end
 
     scenario 'current user can delete his post' do
@@ -120,21 +125,28 @@ RSpec.describe 'post' do
     end
 
     scenario "current user can't delete another users post" do
+
       visit root_path
       raw_login(roy)
+
       post_content = Faker::Lorem.paragraph
       create_post(post_content)
-      expect(page).to have_content(post_content)
+
+      visit users_index_path
+      click_button 'send-friend-request-link'
       click_link 'logout'
+
       visit new_user_session_path
       raw_login(eva)
-      visit root_path
-      visit users_index_path
+
+      visit friendships_path
       click_button 'friend-link'
-      expect(page).to have_content 'as been added to your friend list'
+
+      expect(page).to have_content "you have accepted a friend request from"
       visit root_path
       click_link 'delete'
       expect(page).to have_content('please you are not permited to delete this post')
+      
     end
   end
 end
