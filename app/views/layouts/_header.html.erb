@@ -19,7 +19,7 @@
           <%= link_to "Users", users_index_path, class: "nav-link", id: "users-index-link"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Notifications #{friend_request_count}", friendships_path, class: "nav-link", id: "friend-request-index-link"%>
+          <%= link_to "See Notifications #{friend_request_count}", friendships_path, class: "nav-link", id: "friend-request-index-link"%>
         </li>
       </ul>
     <% else %>
@@ -31,11 +31,11 @@
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html:{ class: "form-inline" }, :defaults => { :input_html => { :class => "sign-in-input-fields" }}) do |f| %>
             <%= f.input :email, required: false, placeholder: "Enter your email", input_html: {id: "sign-in-email"} %>
             <%= f.input :password, placeholder: "Enter your password", input_html: {id: "sign-in-password"} %>
-            <%= f.button :submit, "Log in", id: 'submit-button' %>              
-            <% end %>             
+            <%= f.button :submit, "Log in", id: 'submit-button' %>
+            <% end %>
         </div>
       </div>
-      
-      <% end %>    
-  </div>   
+
+      <% end %>
+  </div>
 </nav>
