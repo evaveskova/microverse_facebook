@@ -2,13 +2,20 @@
 
 class FriendshipsController < ApplicationController
   def create
-    @friend = User.find(params[:friendship][:friend])
-    unless current_user.friends.include? @friend
-      add_friends(@friend)
-      flash[:success] = "#{@friend.first_name} has been added to your friend list"
-      redirect_back(fallback_location: root_path)
-    end
-  end
+		if params[:friendship][:pending_request_id]
+			@pending_friend_request =Friendship.find(params[:friendship][:pending_request_id])
+			change_friendship_status(@pending_friend_request)
+			@request_maker = User.find(params[:friendship][:friend])
+			accept_friend_request(@request_maker)
+		else
+			@friend = User.find(params[:friendship][:friend])
+			unless current_user.friends.include?@friend
+				add_friends(@friend)
+				flash[:success] = "friend request has been sent"
+				redirect_back(fallback_location: root_path)
+			end
+		end
+	end
 
   def destroy
     @friend = Friendship.find(params[:id]).friend
