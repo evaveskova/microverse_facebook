@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class FriendshipsController < ApplicationController
+
+  def index
+    @pending_request = Friendship.where(friend: current_user, status: false)
+    @friendship = Friendship.new
+  end
+  
   def create
 		if params[:friendship][:pending_request_id]
 			@pending_friend_request =Friendship.find(params[:friendship][:pending_request_id])
