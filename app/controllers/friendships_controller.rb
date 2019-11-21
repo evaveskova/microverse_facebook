@@ -2,19 +2,21 @@
 
 class FriendshipsController < ApplicationController
   def index
-    @pending_request = Friendship.where(friend: current_user, status: false)
-    @friendship = Friendship.new
-  end
+		@pending_request = current_user.friendships.where(status: false)
+		@sent_request_test = Friendship.where(friend: current_user,
+      inverse: false, status: false)
+		@friendship = Friendship.new
+	end
 
   # rubocop:disable Style/IdenticalConditionalBranches
-  def create    
+  def create
     if params[:friendship][:pending_request_id]
       @request_maker = User.find(params[:friendship][:friend])
       @pending_friend_request = Friendship.find(params[:friendship][:pending_request_id])
-      @request = Friendship.find_by(user_id: @pending_friend_request.friend_id, 
-        friend_id: @pending_friend_request.user_id)     
-      change_friendship_status(@pending_friend_request, @request_maker, @request)     
-    elsif params[:friendship][:pending_request_id].nil?     
+      @request = Friendship.find_by(user_id: @pending_friend_request.friend_id,
+        friend_id: @pending_friend_request.user_id)
+      change_friendship_status(@pending_friend_request, @request_maker, @request)
+    elsif params[:friendship][:pending_request_id].nil?
       @friend = User.find(params[:friendship][:friend])
       @list_request_senders = User.request_senders(current_user)
       unless current_user.friends.include?@friend
@@ -27,7 +29,7 @@ class FriendshipsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
 
-  end 
+  end
 
   def destroy
     @friendship = Friendship.find(params[:id])
@@ -40,19 +42,19 @@ class FriendshipsController < ApplicationController
       flash[:info] = "#{@friend_name} has been unfriended"
       @friend_name = @friendship.friend.first_name
       redirect_back(fallback_location: root_path)
-    end 
-  end 
+    end
+  end
   # rubocop:enable Style/IdenticalConditionalBranches
 
   private
 
   def friendship_params
     params.require(:friendship).permit(:friend, :pending_request_id, :status)
-  end 
+  end
 
   def add_friends(friend)
     current_user.friends << friend
-  end 
+  end
 
 
   def un_friend(friend)
@@ -73,5 +75,5 @@ class FriendshipsController < ApplicationController
     request.update_attributes(status: true)
     flash[:success] = "you have accepted a friend request from #{@request_maker.first_name}"
     redirect_back(fallback_location: root_path)
-  end 
+  end
 end
