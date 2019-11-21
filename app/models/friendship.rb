@@ -2,19 +2,19 @@
 
 class Friendship < ApplicationRecord
   after_create :create_inverse_relationship
-	after_destroy :destroy_inverse_relationship
+  after_destroy :destroy_inverse_relationship
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
   validates :user, presence: true, uniqueness: { scope: :friend }
   validates :friend, presence: true, uniqueness: { scope: :user }
-  validates :user, presence: true, uniqueness: {scope: :friend}
+  validates :user, presence: true, uniqueness: { scope: :friend }
   validate :not_self
 
-private
+  private
 
   def create_inverse_relationship
-      friend.friendships.create(friend: user, inverse: true)
+    friend.friendships.create(friend: user, inverse: true)
   end
 
   def not_self
@@ -25,5 +25,4 @@ private
     friendship = friend.friendships.find_by(friend: user)
     friendship&.destroy
   end
-
 end
