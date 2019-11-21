@@ -37,6 +37,15 @@ class User < ApplicationRecord
       ORDER BY users.updated_at DESC", user.id])
   end
 
+  def self.request_senders(user)
+    find_by_sql(["SELECT * FROM users
+      WHERE id IN (
+        SELECT user_id FROM friendships
+          WHERE friend_id = ?
+          AND status = false)
+      ORDER BY users.updated_at DESC", user.id])
+  end
+
   private
 
   def downcase_email
