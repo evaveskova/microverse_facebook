@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'users/index'
   get '/show/:id', to: 'users#show', as: 'user'
   devise_for :users, controllers: {
-    registrations: 'registrations'
+    registrations: "registrations", omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   root 'posts#index'

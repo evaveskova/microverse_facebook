@@ -10,12 +10,6 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships, dependent: :destroy
 
-  validates :first_name, presence: true, length: { within: 4..20 }
-  validates :last_name, presence: true, length: { within: 4..20 }
-  validates :email, presence: true, format: Devise.email_regexp
-  validates :gender, presence: true, inclusion: { in: %w[male female custom] }
-  validates :birthday, presence: true
-
   before_save :downcase_email
   before_save :capitalize_names
   before_create :gravatar_image_url
@@ -51,21 +45,23 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.name   # assuming the user model has a name
+      user.first_name = auth.info.name # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
-      # If you are using confirmable and the provider(s) you use validate emails, 
+      # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
   end
 
+  # rubocop:disable Lint/AssignmentInCondition
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
+  # rubocop:enable Lint/AssignmentInCondition
 
   private
 
@@ -79,6 +75,5 @@ class User < ApplicationRecord
 
   def capitalize_names
     self.first_name = first_name.capitalize
-    self.last_name = last_name.capitalize
   end
 end
