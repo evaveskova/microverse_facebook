@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :friend_request_count
 
   def friend_request_count
-    Friendship.where(friend: current_user, status: false).count
+    Friendship.where(friend: current_user, inverse: false, status: false).count
   end
 
   private
