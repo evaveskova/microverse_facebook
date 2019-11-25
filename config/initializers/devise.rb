@@ -298,5 +298,5 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.omniauth :facebook, "2488629584746319",
-  "0c4350d04b9257d630e9e0e4177b08e4"
+  "0c4350d04b9257d630e9e0e4177b08e4", callback_url: "https://still-ridge-12937.herokuapp.com/users/auth/facebook/callback"
 end
