@@ -28,6 +28,9 @@ Finally, run the server and open the site on http://localhost:3000
 * RSpec 3.9
 * Capybara 2.15
 
+## Photo
+<img src="https://res.cloudinary.com/it-s-tech/image/upload/v1584489490/Screenshot_from_2020-03-17_22-34-55_xlnz8d.png">
+
 ## Authors
 * [Eva Aleksandra Veskova Jackson](https://github.com/evaveskova/).
 * [Nyaga Roy](https://github.com/RoyNyaga).
