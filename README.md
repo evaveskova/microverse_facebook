@@ -16,7 +16,7 @@ After that, migrate the database:
 Finally, run the server and open the site on http://localhost:3000
 `$ rails server`
 
-## Technology used
+## Technologies used.
 
 * Ruby 2.6.4
 * Rails 5.2.3
@@ -29,5 +29,5 @@ Finally, run the server and open the site on http://localhost:3000
 * Capybara 2.15
 
 ## Authors
-### [Eva Aleksandra Veskova Jackson](https://github.com/evaveskova/).
-### [Nyaga Roy](https://github.com/RoyNyaga).
+* [Eva Aleksandra Veskova Jackson](https://github.com/evaveskova/).
+* [Nyaga Roy](https://github.com/RoyNyaga).
