@@ -1,6 +1,6 @@
 # Microverse Facebook Project
 
-<img src="https://res.cloudinary.com/it-s-tech/image/upload/v1584489490/Screenshot_from_2020-03-17_22-34-55_xlnz8d.png">
+<img src="https://res.cloudinary.com/it-s-tech/image/upload/v1586209145/Screenshot_from_2020-04-06_22-37-14_ztwoa7.png">
 
 ### About
 This app was built to have similar functionalities to Facebook, wherein users can sign up for a new account or sign in with their own Facebook account, create posts, like and comment on others' posts, and send friend requests to other users. You can see the project requirements on [the Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project).
