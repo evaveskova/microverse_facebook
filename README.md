@@ -26,7 +26,7 @@ Click [here](https://still-ridge-12937.herokuapp.com/) to see the live version.
 ```
 git@github.com:evaveskova/microverse_facebook.git
 ```
-* Install the gems using the comman:
+* Install the gems using the command:
 
 ```
 $ bundle install
