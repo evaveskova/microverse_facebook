@@ -72,6 +72,10 @@ rspec spec/features
 * To see your hosted application on the browser, type the command: <br>
 ``` heroku open```
 
+### Future Features
+* Using Ajax to retrieve comments and post rather than reloading the page all the time.
+* Implementing birthday notification.
+
 ### Authors
 :bust_in_silhouette: [Nyaga Andre Roy](https://github.com/RoyNyaga)
 * Gihub: [RoyNyaga](https://github.com/RoyNyaga)
