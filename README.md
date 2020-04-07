@@ -8,6 +8,9 @@ This app was built to have similar functionalities to Facebook, wherein users ca
 ### Live Demo 
 Click [here](https://still-ridge-12937.herokuapp.com/) to see the live version.
 
+### Demo Video
+Click [here](https://res.cloudinary.com/it-s-tech/video/upload/v1586277556/facebook_xqmqpm.mp4) to watch a demo video.
+
 ### Technologies Used.
 
 * Ruby 2.6.4
